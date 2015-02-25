@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html >
-	<!--- localhost:8600/Sites/ExpenseTracker02/  --->
+	<!--- localhost:8600/Sites/ExpenseTracker4/  --->
 	<body>
 		<h2>Add Expense</h2>
 		<form >
@@ -116,6 +116,7 @@
 		<cfquery datasource="#variables.dsn#">
 			delete from expense
 		</cfquery>
+		<cfset document.getElementById("expList").innerHTML = "Enter an expense item.">
 	</cffunction>
 	
 </cfclient>
