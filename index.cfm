@@ -18,6 +18,7 @@
 				<tr>
 					<td colspan="2">
 						<button type="button" id="addBtn">Add</button>
+						<button type="button" id="deleteAllBtn">Delete All</button>
 					</td>
 				</tr>
 			</table>
@@ -37,6 +38,9 @@
 <script >
 	document.getElementById("addBtn").onclick = function(){
 		addExpense();
+	}
+	document.getElementById("deleteAllBtn").onclick = function(){
+		deleteAllExpenses();
 	}
 </script>
 
@@ -105,6 +109,13 @@
 		
 		<!--- add the new expense row to HTML table --->
 		<cfset addExpenseRow(tmpDate,amt,desc)>
+	</cffunction>
+	
+	<cffunction name="deleteAllExpenses" >
+		<!--- delete all rows in the database table --->		
+		<cfquery datasource="#variables.dsn#">
+			delete from expense
+		</cfquery>
 	</cffunction>
 	
 </cfclient>
