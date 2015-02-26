@@ -50,7 +50,7 @@
 	<!--- on client side you do not need to pre-configure datasource --->
 	<cfset variables.dsn = "expense_db">
 	
-	<!--- create database if not already created --->
+	<!--- create database if not already created. notice the date is an integer --->
 	<cfquery datasource="#variables.dsn#">
 		create table if not exists expense (
 			id integer primary key,
@@ -65,13 +65,14 @@
 		select * from expense order by expense_date desc
 	</cfquery>
 	
-	<!--- Loop over expenses query object and display --->
+	<!--- Loop over expenses query object and display. date is now a javascript date --->
 	<cfloop query="rs">
 		<cfset var tmpDate = new Date(expense_date)>
 		<cfset addExpenseRow(expense_date,amount,desc)>
 	</cfloop>
 	
-	<!--- Helper function to add epxpense row to HTML table --->
+	<!--- Helper function to add epxpense row to HTML table. 
+	      cfsavecontent is used to create the html string for each table row --->
 	<cffunction name="addExpenseRow" >
 		<cfargument name="expense_date" >
 		<cfargument name="amt" >
@@ -87,6 +88,7 @@
 			</cfsavecontent>
 		</cfoutput>
 		
+		<!--- add the row to the expense list table --->
 		<cfset document.getElementById("expList").innerHTML += rowHtml>
 	</cffunction>
 	
